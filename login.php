@@ -28,12 +28,21 @@ if(isset($_POST['login'])){
 <head>
 <title>Login</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+    background: linear-gradient(135deg, #f596da, #b0ecf1);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 </head>
 
 <body class="bg-light">
 
 <div class="container mt-5">
-<div class="col-md-4 mx-auto card p-4 shadow">
+<div class="col-md-3 mx-auto card p-4 shadow" style="width: 370px">
 
 <h3 class="text-center">Login</h3>
 
@@ -48,7 +57,7 @@ if(isset($_POST['login'])){
 <button type="button" class="btn btn-outline-secondary" onclick="togglePass()">👁</button>
 </div>
 <br>
-<button class="btn btn-success w-100" name="login">Login</button>
+<button class="btn btn-success w-100 rounded-3" name="login">Login</button>
 
 </form>
 <p class="text-center mt-2">
