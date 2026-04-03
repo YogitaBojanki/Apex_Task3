@@ -47,7 +47,7 @@ if(isset($_POST['login'])){
 <input type="password" name="password" id="pass" class="form-control" placeholder="Password">
 <button type="button" class="btn btn-outline-secondary" onclick="togglePass()">👁</button>
 </div>
-
+<br>
 <button class="btn btn-success w-100" name="login">Login</button>
 
 </form>

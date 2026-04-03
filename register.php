@@ -70,15 +70,15 @@ if(isset($_POST['register'])){
 </div>
 <small class="text-muted">
 Must include uppercase, lowercase, number & special character
-</small>
+</small><br>
 <small id="passError" class="text-danger"></small>
-
+<br>
 <button class="btn btn-primary w-100" name="register">Register</button>
 
 </form>
 
 <p class="text-center mt-2">
-<a href="login.php">Already have account?</a>
+Already have account? <a href="login.php">Login Here</a>
 </p>
 
 </div>
