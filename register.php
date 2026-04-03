@@ -7,14 +7,25 @@ if(isset($_POST['register'])){
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validation
+    // EMPTY CHECK
     if(empty($name) || empty($email) || empty($password)){
         $message = "<div class='alert alert-danger'>All fields are required</div>";
-    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    }
+
+    // EMAIL CHECK
+    elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $message = "<div class='alert alert-danger'>Invalid email format</div>";
-    } elseif(strlen($password) < 6){
-        $message = "<div class='alert alert-danger'>Password must be at least 6 characters</div>";
-    } else {
+    }
+
+    // 🔐 STRONG PASSWORD CHECK (ADD HERE ✅)
+    elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/', $password)) {
+        $message = "<div class='alert alert-danger'>
+        Password must be strong (uppercase, lowercase, number, special char)
+        </div>";
+    }
+
+    // IF EVERYTHING OK → INSERT
+    else {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO users(name,email,password,role) VALUES(?,?,?,'user')");
@@ -57,6 +68,9 @@ if(isset($_POST['register'])){
 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
 <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">👁</button>
 </div>
+<small class="text-muted">
+Must include uppercase, lowercase, number & special character
+</small>
 <small id="passError" class="text-danger"></small>
 
 <button class="btn btn-primary w-100" name="register">Register</button>
@@ -79,26 +93,38 @@ function togglePassword(){
 function validateForm(){
     let valid = true;
 
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let pass = document.getElementById("password").value;
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let pass = document.getElementById("password").value.trim();
 
     document.getElementById("nameError").innerText = "";
     document.getElementById("emailError").innerText = "";
     document.getElementById("passError").innerText = "";
 
+    // Name
     if(name === ""){
         document.getElementById("nameError").innerText = "Name required";
         valid = false;
     }
 
-    if(!email.includes("@")){
+    // Email
+    if(email === ""){
+        document.getElementById("emailError").innerText = "Email required";
+        valid = false;
+    } else if(!email.includes("@")){
         document.getElementById("emailError").innerText = "Valid email required";
         valid = false;
     }
 
-    if(pass.length < 6){
-        document.getElementById("passError").innerText = "Min 6 characters";
+    // Password STRONG validation
+    let strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
+
+    if(pass === ""){
+        document.getElementById("passError").innerText = "Password required";
+        valid = false;
+    } else if(!strongPassword.test(pass)){
+        document.getElementById("passError").innerText =
+        "Password must include uppercase, lowercase, number & special character";
         valid = false;
     }
 
