@@ -10,7 +10,7 @@ $user = $result->fetch_assoc();
     Name: <input type="text" name="name" value="<?php echo $user['name']; ?>"><br>
     <button name="update">Update</button>
 </form>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
 if(isset($_POST['update'])) {
     $name = $_POST['name'];

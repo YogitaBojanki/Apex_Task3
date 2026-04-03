@@ -5,7 +5,7 @@
     Password: <input type="password" name="password"><br>
     <button name="login">Login</button>
 </form>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
 if(isset($_POST['login'])) {
     $email = $_POST['email'];
