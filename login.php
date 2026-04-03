@@ -51,7 +51,9 @@ if(isset($_POST['login'])){
 <button class="btn btn-success w-100" name="login">Login</button>
 
 </form>
-
+<p class="text-center mt-2">
+Don't have an account? <a href="register.php">Register Here</a>
+</p>
 </div>
 </div>
 
